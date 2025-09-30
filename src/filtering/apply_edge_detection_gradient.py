@@ -1,0 +1,32 @@
+#read image
+img = plt.imread('Set5/bird_GT.bmp')
+#img = plt.imread('Set5/butterfly_GT.bmp')
+#img = plt.imread('Set5/woman_GT.bmp')
+#img = plt.imread('Set5/baby_GT.bmp')
+#img = plt.imread('Set5/head_GT.bmp')
+
+gray = norm_gray(img)
+
+edgeDet = EdgeDetection()
+gradient_x, gradient_y = edgeDet.gradient_filter(gray)
+gradient_mag = edgeDet.compute_magnitude(gradient_x, gradient_y)
+
+#plotting
+fig = plt.figure(figsize=(15, 15))
+fig.add_subplot(2,2,1)
+plt.imshow(gray, cmap='gray')
+plt.title('Gray')
+plt.axis('off')
+fig.add_subplot(2,2,2)
+plt.imshow(gradient_x, cmap='gray')
+plt.title('Gradient x')
+plt.axis('off')
+fig.add_subplot(2,2,3)
+plt.imshow(gradient_y, cmap='gray')
+plt.title('Gradient y')
+plt.axis('off')
+fig.add_subplot(2,2,4)
+plt.imshow(gradient_mag, cmap='gray')
+plt.title('Gradient magnitude')
+plt.axis('off')
+plt.show()
